@@ -9,9 +9,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -102,26 +99,33 @@ export default function MiniDrawer() {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       {/* App Header */}
-      <AppBar position="fixed" open={open}>
+
+      <AppBar position="static" style={{ backgroundColor: '#365069' }}>
+        <Toolbar>
+          <IconButton>
+            <img src={require("../assets/piramal.png")} alt="icon" />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+
+      {/* <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            // onClick={handleDrawerOpen}
             edge="start"
             sx={{
               marginRight: 5,
               ...(open && { display: 'none' }),
             }}
           >
-            {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            Piramal
           </Typography>
         </Toolbar>
-      </AppBar>
-      {/* Drower */}
+      </AppBar> */}
       
       <Drawer variant="permanent" open={open}>
         <Divider />
@@ -150,30 +154,6 @@ export default function MiniDrawer() {
           ))}
         </List>
         <Divider />
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
     </Box>
   );
