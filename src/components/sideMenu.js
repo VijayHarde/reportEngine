@@ -15,8 +15,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { deepOrange } from '@mui/material/colors';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 const drawerWidth = 240;
+
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -87,6 +93,32 @@ export default function MiniDrawer() {
   // const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const menuId = 'primary-search-account-menu';
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -94,6 +126,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -105,8 +138,41 @@ export default function MiniDrawer() {
           <IconButton>
             <img src={require("../assets/piramal.png")} alt="icon" />
           </IconButton>
+          <Box style={{display:'flex',justifyContent:'end',width:'100%'}}>
+        <IconButton
+          size="large"
+          edge="end"
+          aria-label="account of current user"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+          </Box>
         </Toolbar>
+
       </AppBar>
+
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
+        <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+      </Menu>
 
 
       {/* <AppBar position="fixed" open={open}>
@@ -126,7 +192,7 @@ export default function MiniDrawer() {
           </Typography>
         </Toolbar>
       </AppBar> */}
-      
+
       <Drawer variant="permanent" open={open}>
         <Divider />
         <List>
