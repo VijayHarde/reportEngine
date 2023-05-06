@@ -104,6 +104,8 @@ const Report = () => {
         setReport('');
         setStartDate('');
         setEndDate('');
+        setReportType('');
+        setInputValue('');
     }
 
     const isFormValid = () => {

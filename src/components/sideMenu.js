@@ -17,10 +17,8 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import { deepOrange } from '@mui/material/colors';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useNavigate  } from "react-router-dom";
 const drawerWidth = 240;
 
 
@@ -90,7 +88,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
-  // const theme = useTheme();
+  const navigate  = useNavigate();
+
   const [open, setOpen] = React.useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -127,6 +126,13 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const navigateToDestination = (index) => {
+    if(index == 1) {
+      navigate("/report");
+    }else {
+      navigate("/reportAll");
+    }
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -197,7 +203,7 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {['Inbox', 'Starred', 'Send email'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItem onClick={() => navigateToDestination(index)} key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
